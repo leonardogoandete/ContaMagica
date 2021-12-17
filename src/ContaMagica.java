@@ -47,7 +47,21 @@ public class ContaMagica {
         }
     }
     public void retirada(BigDecimal valor) {
-
+        if (valor.compareTo(new BigDecimal("0.00")) < 0) {
+            return;
+        } else {
+            saldo = saldo.subtract(valor);
+            if (categoria == Categorias.Platinum) {
+                if (saldo.compareTo(new BigDecimal(100000.00)) < 0) {
+                    categoria = Categorias.Gold;
+                }
+            }
+            if (categoria == Categorias.Gold) {
+                if (saldo.compareTo(new BigDecimal(25000.00)) < 0) {
+                    categoria = Categorias.Silver;
+                }
+            }
+        }
     }
 }
 
